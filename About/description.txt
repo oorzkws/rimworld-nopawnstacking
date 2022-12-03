@@ -1,0 +1,1 @@
+Pawns aren't allowed to stack on the same tile when performing duties that bring their weapon out
