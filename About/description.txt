@@ -1,1 +1,11 @@
-Pawns aren't allowed to stack on the same tile when performing duties that bring their weapon out
+Prevents pawns from stacking when performing any combat duties.
+
+[h3]Technical stuff[/h3]
+If a pawn is performing a duty that has the attribute alwaysShowWeapon, they will not be able to share a tile with other pawns. This replaces the periodic check of "is there a hostile in a given radius", resulting in a more predictable experience.
+
+These duties are basically any sort of active participation in hostilities - raiding, sapping, breaching, prison breaks, etc.
+
+[h3]Requires[/h3]
+[list]
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url]
+[/list]

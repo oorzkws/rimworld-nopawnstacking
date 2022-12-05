@@ -1,7 +1,7 @@
 <ModMetaData>
-  <name>No Pawn Stacking/Always Collide in Combat</name>
+  <name>Combat always collides</name>
   <author>Mute</author>
-  <description>Prevents pawns from stacking when they have weapons out</description>
+  <description>Prevents pawns from stacking when performing any combat duties</description>
   <packageId>mute.nopawnstacking</packageId>
   <url></url>
   <supportedVersions>
