@@ -18,9 +18,13 @@ public static class Main
 public static class HarmonyPatches
 {
     [HarmonyPatch(typeof(Pawn_MindState), "MindStateTick")]
-    [HarmonyDebug]
     public static class MindStateTickPatch
     {
+        private static bool IsRealCombatant(Pawn_MindState mindState)
+        {
+            return mindState.duty?.def.alwaysShowWeapon is true ||
+                   mindState.mentalStateHandler.CurStateDef?.IsAggro is true;
+        }
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             return new CodeMatcher(instructions, generator).Start().MatchEndForward(
@@ -31,29 +35,12 @@ public static class HarmonyPatches
                 new CodeMatch(i => i.opcode == OpCodes.Brfalse_S),
                 new CodeMatch(i => i.opcode == OpCodes.Ldarg_0)
             )
-            .Advance(1)
+            .Advance(1) // Skip past the ldarg0
             .RemoveInstructions(14) // Remove the original body
-            .InsertAndAdvance( // AnyCloseHostilesRecently = Pawn_MindState.duty.def.alwaysShowWeapon
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_MindState), "duty")),
-                new CodeInstruction(OpCodes.Dup),
-                new CodeInstruction(OpCodes.Brtrue), // -> 52
-                new CodeInstruction(OpCodes.Pop),
-                new CodeInstruction(OpCodes.Ldc_I4_0),
-                new CodeInstruction(OpCodes.Br), // -> 54
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(PawnDuty), "def"))
-            )
-            .Advance(-1) // I don't know why, but the label drops one instruction forward here.
-            .CreateLabel(out var label52)
-            .Advance(1)
             .InsertAndAdvance(
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(DutyDef), "alwaysShowWeapon"))
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MindStateTickPatch), "IsRealCombatant"))
             )
-            .CreateLabel(out var label54)
-            .MatchStartBackwards(new CodeMatch(OpCodes.Br)) // Add our labels now that they exist
-            .SetOperandAndAdvance(label54)
-            .MatchStartBackwards(new CodeMatch(OpCodes.Brtrue)) // Same thing again
-            .SetOperandAndAdvance(label52)
             .InstructionEnumeration();
         }
     }
