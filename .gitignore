@@ -1,4 +1,4 @@
 obj
 .idea
-!nopawnstacking.dll
 *.dll
+!nopawnstacking.dll
