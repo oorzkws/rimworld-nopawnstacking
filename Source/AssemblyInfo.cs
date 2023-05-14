@@ -1,6 +1,4 @@
-<#@ template language="C#" #>
-<#@ output extension=".cs" encoding="utf-8"#>
-
+﻿
 using System.Reflection;
 
 // General Information about an assembly is controlled through the following 
@@ -26,4 +24,4 @@ using System.Reflection;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.4.0.0")]
-[assembly: AssemblyFileVersion("<#= DateTime.Now.ToString("yy.MM.dd.hhmmss") #>")]
+[assembly: AssemblyFileVersion("23.05.14.055344")]

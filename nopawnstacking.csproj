@@ -1,34 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputPath>1.4\Assemblies</OutputPath>
-    <TargetFramework>net472</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <DebugType>None</DebugType>
-    <LangVersion>latest</LangVersion>
-    <TransformOnBuild>true</TransformOnBuild>
-    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-  <!--NuGet Packages-->
-  <ItemGroup>
-    <PackageReference Include="Krafs.Publicizer" Version="*" PrivateAssets="all" ExcludeAssets="runtime" />
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="*" ExcludeAssets="runtime" />
-    <PackageReference Include="Lib.Harmony" Version="*" ExcludeAssets="runtime" />
-  </ItemGroup>
-  <!--Publicizer Settings-->
-  <ItemGroup>
-    <Publicize Include="Assembly-CSharp" />
-  </ItemGroup>
-  <!--Automatic versioning-->
-  <ItemGroup>
-    <Content Include="Source\AssemblyInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </Content>
+    <PropertyGroup>
+        <OutputPath>1.4\Assemblies</OutputPath>
+        <TargetFramework>net472</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <DebugType>None</DebugType>
+        <LangVersion>latest</LangVersion>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+    <!--NuGet Packages-->
+    <ItemGroup>
+        <PackageReference Include="Krafs.Publicizer" Version="*" PrivateAssets="all" ExcludeAssets="runtime" />
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="*" ExcludeAssets="runtime" />
+        <PackageReference Include="Lib.Harmony" Version="*" ExcludeAssets="runtime" />
+    </ItemGroup>
+    <!--Publicizer Settings-->
+    <ItemGroup>
+        <Publicize Include="Assembly-CSharp" />
+    </ItemGroup>
+    <!--Automatic versioning-->
+    <ItemGroup>
+        <Content Include="Source\AssemblyInfo.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+        </Content>
         <Compile Update="Source\AssemblyInfo.cs">
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TextTemplating\Microsoft.TextTemplating.targets" />
+            <DependentUpon>AssemblyInfo.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TextTemplating\Microsoft.TextTemplating.targets" />
 </Project>
