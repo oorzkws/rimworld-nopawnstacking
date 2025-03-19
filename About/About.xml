@@ -3,9 +3,10 @@
     <author>Mute</author>
     <description>Prevents pawns from stacking when performing any combat duties</description>
     <packageId>mute.nopawnstacking</packageId>
-    <url></url>
+    <url>https://steamcommunity.com/sharedfiles/filedetails/?id=2897894688</url>
     <supportedVersions>
         <li>1.4</li>
+        <li>1.5</li>
     </supportedVersions>
     <modDependencies>
         <li>
